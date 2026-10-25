@@ -43,23 +43,11 @@ async function getNotes() {
 
 // ---- POST ----
 async function createNote(title, body) {
-  return request(API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json; charset=UTF-8" },
-    body: JSON.stringify({ title, body, userId: 1 }),
-  });
-}
-
-// ---- DELETE ----
-// JSONPlaceholder is a fake API: it never stores notes we create, so a note
-// created with POST (id 101) does not exist on the server and a real DELETE
-// would not make sense. Approach: notes loaded from the server (ids 1-100)
-// get a real DELETE request; notes created in this session (flagged
-// `local: true`) are only removed from the page, because there is nothing
-// on the server to delete. A real backend would delete both the same way.
-async function deleteNote(note) {
-  if (note.local) return { status: 200 };
-  return request(`${API_URL}/${note.id}`, { method: "DELETE" });
+  return request(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json; charset=UTF-8" },
+    body: JSON.stringify({ title, body, userId: 1 }),
+  });
 }
 
 // ---- Rendering (empty state included) ----

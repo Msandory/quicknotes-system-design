@@ -50,6 +50,13 @@ async function createNote(title, body) {
   });
 }
 
+// ---- DELETE ----
+// JSONPlaceholder is a fake API: it never stores notes we create, so a note
+async function deleteNote(note) {
+  if (note.local) return { status: 200 };
+  return request(`${API_URL}/${note.id}`, { method: "DELETE" });
+}
+
 // ---- Rendering (empty state included) ----
 function render() {
   list.replaceChildren();
